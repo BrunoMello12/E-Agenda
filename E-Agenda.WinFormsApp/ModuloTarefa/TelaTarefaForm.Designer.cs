@@ -33,13 +33,11 @@
             label3 = new Label();
             txtId = new TextBox();
             txtTitulo = new TextBox();
-            button1 = new Button();
+            btnGravar = new Button();
             button2 = new Button();
-            rdbPrioridadeBaixa = new RadioButton();
-            rdbPrioridadeMedia = new RadioButton();
-            rdbPrioridadeAlta = new RadioButton();
             label4 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            txtData = new DateTimePicker();
+            cmbPrioridade = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -88,17 +86,17 @@
             txtTitulo.Size = new Size(132, 23);
             txtTitulo.TabIndex = 4;
             // 
-            // button1
+            // btnGravar
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.DialogResult = DialogResult.OK;
-            button1.Location = new Point(169, 243);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 44);
-            button1.TabIndex = 6;
-            button1.Text = "Gravar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnGravar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnGravar.DialogResult = DialogResult.OK;
+            btnGravar.Location = new Point(169, 243);
+            btnGravar.Name = "btnGravar";
+            btnGravar.Size = new Size(75, 44);
+            btnGravar.TabIndex = 6;
+            btnGravar.Text = "Gravar";
+            btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += btnGravar_Click;
             // 
             // button2
             // 
@@ -111,42 +109,6 @@
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
-            // rdbPrioridadeBaixa
-            // 
-            rdbPrioridadeBaixa.AutoSize = true;
-            rdbPrioridadeBaixa.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            rdbPrioridadeBaixa.Location = new Point(127, 149);
-            rdbPrioridadeBaixa.Name = "rdbPrioridadeBaixa";
-            rdbPrioridadeBaixa.Size = new Size(63, 24);
-            rdbPrioridadeBaixa.TabIndex = 8;
-            rdbPrioridadeBaixa.TabStop = true;
-            rdbPrioridadeBaixa.Text = "Baixa";
-            rdbPrioridadeBaixa.UseVisualStyleBackColor = true;
-            // 
-            // rdbPrioridadeMedia
-            // 
-            rdbPrioridadeMedia.AutoSize = true;
-            rdbPrioridadeMedia.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            rdbPrioridadeMedia.Location = new Point(201, 149);
-            rdbPrioridadeMedia.Name = "rdbPrioridadeMedia";
-            rdbPrioridadeMedia.Size = new Size(69, 24);
-            rdbPrioridadeMedia.TabIndex = 9;
-            rdbPrioridadeMedia.TabStop = true;
-            rdbPrioridadeMedia.Text = "Media";
-            rdbPrioridadeMedia.UseVisualStyleBackColor = true;
-            // 
-            // rdbPrioridadeAlta
-            // 
-            rdbPrioridadeAlta.AutoSize = true;
-            rdbPrioridadeAlta.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            rdbPrioridadeAlta.Location = new Point(287, 149);
-            rdbPrioridadeAlta.Name = "rdbPrioridadeAlta";
-            rdbPrioridadeAlta.Size = new Size(54, 24);
-            rdbPrioridadeAlta.TabIndex = 10;
-            rdbPrioridadeAlta.TabStop = true;
-            rdbPrioridadeAlta.Text = "Alta";
-            rdbPrioridadeAlta.UseVisualStyleBackColor = true;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -157,26 +119,33 @@
             label4.TabIndex = 11;
             label4.Text = "Data: ";
             // 
-            // dateTimePicker1
+            // txtData
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(127, 195);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(117, 23);
-            dateTimePicker1.TabIndex = 12;
+            txtData.Format = DateTimePickerFormat.Short;
+            txtData.Location = new Point(127, 195);
+            txtData.Name = "txtData";
+            txtData.Size = new Size(117, 23);
+            txtData.TabIndex = 12;
+            // 
+            // cmbPrioridade
+            // 
+            cmbPrioridade.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPrioridade.FormattingEnabled = true;
+            cmbPrioridade.Location = new Point(123, 153);
+            cmbPrioridade.Name = "cmbPrioridade";
+            cmbPrioridade.Size = new Size(121, 23);
+            cmbPrioridade.TabIndex = 13;
             // 
             // TelaTarefaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(354, 299);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(cmbPrioridade);
+            Controls.Add(txtData);
             Controls.Add(label4);
-            Controls.Add(rdbPrioridadeAlta);
-            Controls.Add(rdbPrioridadeMedia);
-            Controls.Add(rdbPrioridadeBaixa);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnGravar);
             Controls.Add(txtTitulo);
             Controls.Add(txtId);
             Controls.Add(label3);
@@ -196,12 +165,10 @@
         private Label label3;
         private TextBox txtId;
         private TextBox txtTitulo;
-        private Button button1;
+        private Button btnGravar;
         private Button button2;
-        private RadioButton rdbPrioridadeBaixa;
-        private RadioButton rdbPrioridadeMedia;
-        private RadioButton rdbPrioridadeAlta;
         private Label label4;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker txtData;
+        private ComboBox cmbPrioridade;
     }
 }

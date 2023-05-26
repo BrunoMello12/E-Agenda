@@ -11,13 +11,12 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
     public class Tarefa : EntidadeBase<Tarefa>
     {
         public string titulo;
-        public string prioridade;
+        public StatusPrioridadeEnum prioridade;
         public DateTime data;
-        public ArrayList subTarefa = new ArrayList();
-        public double porcentagem;
 
-        public Tarefa(string titulo, string prioridade, DateTime data)
+        public Tarefa(int id, string titulo, StatusPrioridadeEnum prioridade, DateTime data)
         {
+            this.id = id;
             this.titulo = titulo;
             this.prioridade = prioridade;
             this.data = data;
@@ -37,7 +36,16 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override string[] Validar()
         {
-            throw new NotImplementedException();
+            List<string> erros = new List<string>();
+
+            if (string.IsNullOrEmpty(titulo))
+                erros.Add("O campo título é obrigatório");
+
+            if (prioridade == null)
+                erros.Add("O campo prioridade é obrigatório");
+
+            return erros.ToArray();
+
         }
     }
 }

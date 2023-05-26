@@ -18,11 +18,11 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
             this.repositorioTarefa = repositorioTarefa;
         }
 
-        public override string ToolTipInserir { get { return "Inserir uma nova Tarefa"; } }
+        public override string ToolTipInserir => "Inserir uma nova Tarefa"; 
 
-        public override string ToolTipEditar { get { return "Editar uma Tarefa existente"; } }
+        public override string ToolTipEditar => "Editar uma Tarefa existente";
 
-        public override string ToolTipExcluir { get { return "Excluir uma Tarefa existente"; } }
+        public override string ToolTipExcluir => "Excluir uma Tarefa existente";
 
         public override void Editar()
         {
@@ -30,13 +30,21 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
             TelaTarefaForm telaTarefa = new TelaTarefaForm();
 
-            telaTarefa.Tarefa = listagemTarefa.ObterTarefaSelecionada();
+            Tarefa tarefaSelecionada = listagemTarefa.ObterTarefaSelecionada();
+
+            if(tarefaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma tarefa primeiro!", "Edição de tarefas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            telaTarefa.ConfigurarTela(tarefaSelecionada);
 
             DialogResult opcaoEscolhida = telaTarefa.ShowDialog();
 
             if(opcaoEscolhida == DialogResult.OK)
             {
-                Tarefa tarefa = telaTarefa.Tarefa;
+                Tarefa tarefa = telaTarefa.ObterTarefa();
 
                 repositorioTarefa.Editar(tarefa.id, tarefa);
 
@@ -48,13 +56,19 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
         {
             if (repositorioTarefa.listaRegistros.Count == 0) return;
 
-            Tarefa tarefa = listagemTarefa.ObterTarefaSelecionada();
+            Tarefa tarefaSelecionada = listagemTarefa.ObterTarefaSelecionada();
 
-            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a tarefa {tarefa.titulo}?", "Exclusão de Contatos", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (tarefaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma tarefa primeiro!", "Exclusão de tarefas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a tarefa {tarefaSelecionada.titulo}?", "Exclusão de Contatos", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if(opcaoEscolhida == DialogResult.OK)
             {
-                repositorioTarefa.Excluir(tarefa);
+                repositorioTarefa.Excluir(tarefaSelecionada);
 
                 CarregarTarefas();
             }
@@ -68,7 +82,7 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
             if(opcaoEscolhida == DialogResult.OK)
             {
-                Tarefa tarefa = telaTarefa.Tarefa;
+                Tarefa tarefa = telaTarefa.ObterTarefa();
 
                 repositorioTarefa.Inserir(tarefa);
 

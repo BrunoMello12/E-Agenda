@@ -1,4 +1,5 @@
-﻿using E_Agenda.WinFormsApp.ModuloContato;
+﻿using E_Agenda.WinFormsApp.Compartilhado;
+using E_Agenda.WinFormsApp.ModuloContato;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,38 +15,57 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
     public partial class TelaTarefaForm : Form
     {
-        private Tarefa tarefa;
-        private string prioridade;
 
         public TelaTarefaForm()
         {
             InitializeComponent();
+
+            this.ConfigurarDialog();
+
+            CarregarPrioridades();
         }
 
-        public Tarefa Tarefa
+        public void CarregarPrioridades()
         {
-            get { return tarefa; }
-            set { txtId.Text = value.id.ToString(); txtTitulo.Text = value.titulo; }
+            StatusPrioridadeEnum[] prioridades = Enum.GetValues<StatusPrioridadeEnum>();
+
+            foreach (StatusPrioridadeEnum prioridade in prioridades)
+            {
+                cmbPrioridade.Items.Add(prioridade);
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public Tarefa ObterTarefa()
         {
+            int id = int.Parse(txtId.Text);
             string titulo = txtTitulo.Text;
+            DateTime data = txtData.Value;
 
-            if (rdbPrioridadeAlta.Checked)
-                prioridade = rdbPrioridadeAlta.Text;
-            else if (rdbPrioridadeBaixa.Checked)
-                prioridade = rdbPrioridadeBaixa.Text;
-            else if (rdbPrioridadeMedia.Checked)
-                prioridade = rdbPrioridadeMedia.Text;
+            StatusPrioridadeEnum prioridade = (StatusPrioridadeEnum)cmbPrioridade.SelectedItem;
 
-            DateTime data = dateTimePicker1.Value;
-
-            tarefa = new Tarefa(titulo, prioridade, data);
-
-            if (txtId.Text != "0")
-                tarefa.id = int.Parse(txtId.Text);
+            return new Tarefa(id, titulo, prioridade, data);
         }
-        
+
+        public void ConfigurarTela(Tarefa tarefaSelecionada)
+        {
+            txtId.Text = tarefaSelecionada.id.ToString();
+            txtTitulo.Text = tarefaSelecionada.titulo;
+            txtData.Value = tarefaSelecionada.data.Date;
+            cmbPrioridade.Text = tarefaSelecionada.prioridade.ToString();
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            Tarefa tarefa = ObterTarefa();
+
+            string[] erros = tarefa.Validar();
+
+            if (erros.Length > 0)
+            {
+                TelaPrincipalForm1.instancia.AtualizarRodape(erros[0]);
+
+                DialogResult = DialogResult.None;
+            }
+        }
     }
 }
