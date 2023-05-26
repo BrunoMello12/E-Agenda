@@ -8,13 +8,34 @@ namespace E_Agenda.WinFormsApp
     public partial class TelaPrincipalForm1 : Form
     {
         private ControladorBase controlador;
-        private RepositorioContato repositorioContato = new RepositorioContato();
-        private RepositorioTarefa repositorioTarefa = new RepositorioTarefa();
-        private RepositorioCompromisso repositorioCompromisso = new RepositorioCompromisso();
+        private RepositorioContato repositorioContato = new RepositorioContato(new());
+        private RepositorioTarefa repositorioTarefa = new RepositorioTarefa(new());
+        private RepositorioCompromisso repositorioCompromisso = new RepositorioCompromisso(new());
+
+        private static TelaPrincipalForm1 telaPrincipal;
 
         public TelaPrincipalForm1()
         {
             InitializeComponent();
+
+            telaPrincipal = this;
+        }
+
+        public void AtualizarRodape(string mensagem)
+        {
+            lblRodape.Text = mensagem;
+        }
+
+
+        public static TelaPrincipalForm1 instancia
+        {
+            get
+            {
+                if (telaPrincipal == null)
+                    telaPrincipal = new TelaPrincipalForm1();
+
+                return telaPrincipal;
+            }
         }
 
         private void contatosMenuItem_Click(object sender, EventArgs e)
@@ -98,5 +119,7 @@ namespace E_Agenda.WinFormsApp
 
             controlador.Filtrar();
         }
+
+
     }
 }

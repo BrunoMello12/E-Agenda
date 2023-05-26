@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Agenda.WinFormsApp.Compartilhado;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,39 +7,11 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
-    public class RepositorioTarefa 
+    public class RepositorioTarefa : RepositorioBase<Tarefa>
     {
-        public List<Tarefa> tarefaList = new List<Tarefa>();
-        private static int contador = 1;
-
-        public void Inserir(Tarefa tarefa)
+        public RepositorioTarefa(List<Tarefa> tarefas) 
         {
-            tarefa.id = contador++;
-
-            tarefaList.Add(tarefa);
-        }
-
-        public List<Tarefa> SelecionarTodos()
-        {
-            return tarefaList;
-        }
-
-        public void Editar(Tarefa tarefa)
-        {
-            Tarefa tarefaSelecionada = SelecionarPorId(tarefa.id);
-
-            tarefaSelecionada.titulo = tarefa.titulo;
-            tarefaSelecionada.prioridade = tarefa.prioridade;
-        }
-
-        public Tarefa SelecionarPorId(int id)
-        {
-            return tarefaList.FirstOrDefault(x => x.id == id);
-        }
-
-        public void Excluir(Tarefa tarefa)
-        {
-            tarefaList.Remove(tarefa);
+            listaRegistros = tarefas;
         }
     }
 }

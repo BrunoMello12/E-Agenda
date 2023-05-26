@@ -26,7 +26,7 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override void Editar()
         {
-            if (repositorioTarefa.tarefaList.Count == 0) return;
+            if (repositorioTarefa.listaRegistros.Count == 0) return;
 
             TelaTarefaForm telaTarefa = new TelaTarefaForm();
 
@@ -38,7 +38,7 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
             {
                 Tarefa tarefa = telaTarefa.Tarefa;
 
-                repositorioTarefa.Editar(tarefa);
+                repositorioTarefa.Editar(tarefa.id, tarefa);
 
                 CarregarTarefas();
             }
@@ -46,7 +46,7 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override void Excluir()
         {
-            if (repositorioTarefa.tarefaList.Count == 0) return;
+            if (repositorioTarefa.listaRegistros.Count == 0) return;
 
             Tarefa tarefa = listagemTarefa.ObterTarefaSelecionada();
 

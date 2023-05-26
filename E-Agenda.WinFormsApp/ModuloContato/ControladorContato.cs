@@ -9,8 +9,8 @@ namespace E_Agenda.WinFormsApp.ModuloContato
 {
     public class ControladorContato : ControladorBase
     {
-        RepositorioContato repositorioContato;
-        ListaContatoControl listagemContato;
+        private RepositorioContato repositorioContato;
+        private ListaContatoControl listagemContato;
 
         public ControladorContato(RepositorioContato repositorioContato)
         {
@@ -31,9 +31,37 @@ namespace E_Agenda.WinFormsApp.ModuloContato
 
             if(opcaoEscolhida == DialogResult.OK)
             {
-                Contato contato = telaContato.Contato;
+                Contato contato = telaContato.ObterContato();
 
                 repositorioContato.Inserir(contato);
+
+                CarregarContatos();
+            }
+        }
+
+        public override void Editar()
+        {
+            TelaContatoForm telaContato = new TelaContatoForm();
+
+            Contato contatoSelecionado = listagemContato.ObterContatoSelecionado();
+
+            if(contatoSelecionado == null) 
+            {
+                MessageBox.Show("Selecione um contato primeiro!", "Edição de contatos",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            telaContato.ConfigurarTela(contatoSelecionado);
+
+            DialogResult opcaoEscolhida = telaContato.ShowDialog();
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                Contato contato = telaContato.ObterContato();
+
+                repositorioContato.Editar(contato.id, contato);
 
                 CarregarContatos();
             }
@@ -61,29 +89,11 @@ namespace E_Agenda.WinFormsApp.ModuloContato
             return "Cadastro de Contatos";
         }
 
-        public override void Editar()
-        {
-            if (repositorioContato.contatoList.Count == 0) return;
-
-            TelaContatoForm telaContato = new TelaContatoForm();
-
-            telaContato.Contato = listagemContato.ObterContatoSelecionado();
-
-            DialogResult opcaoEscolhida = telaContato.ShowDialog();
-
-            if(opcaoEscolhida == DialogResult.OK)
-            {
-                Contato contato = telaContato.Contato;
-
-                repositorioContato.Editar(contato);
-
-                CarregarContatos();
-            }
-        }
+        
 
         public override void Excluir()
         {
-            if (repositorioContato.contatoList.Count == 0) return;
+            if (repositorioContato.listaRegistros.Count == 0) return;
 
             Contato contato = listagemContato.ObterContatoSelecionado();
 

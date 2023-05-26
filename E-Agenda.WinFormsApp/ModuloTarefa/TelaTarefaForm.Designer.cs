@@ -38,6 +38,8 @@
             rdbPrioridadeBaixa = new RadioButton();
             rdbPrioridadeMedia = new RadioButton();
             rdbPrioridadeAlta = new RadioButton();
+            label4 = new Label();
+            dateTimePicker1 = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -64,7 +66,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(12, 143);
+            label3.Location = new Point(12, 148);
             label3.Name = "label3";
             label3.Size = new Size(109, 25);
             label3.TabIndex = 2;
@@ -81,7 +83,7 @@
             // 
             // txtTitulo
             // 
-            txtTitulo.Location = new Point(127, 101);
+            txtTitulo.Location = new Point(127, 98);
             txtTitulo.Name = "txtTitulo";
             txtTitulo.Size = new Size(132, 23);
             txtTitulo.TabIndex = 4;
@@ -90,7 +92,7 @@
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.DialogResult = DialogResult.OK;
-            button1.Location = new Point(351, 317);
+            button1.Location = new Point(169, 243);
             button1.Name = "button1";
             button1.Size = new Size(75, 44);
             button1.TabIndex = 6;
@@ -102,7 +104,7 @@
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button2.DialogResult = DialogResult.Cancel;
-            button2.Location = new Point(437, 317);
+            button2.Location = new Point(255, 243);
             button2.Name = "button2";
             button2.Size = new Size(75, 44);
             button2.TabIndex = 7;
@@ -145,11 +147,31 @@
             rdbPrioridadeAlta.Text = "Alta";
             rdbPrioridadeAlta.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(61, 193);
+            label4.Name = "label4";
+            label4.Size = new Size(60, 25);
+            label4.TabIndex = 11;
+            label4.Text = "Data: ";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(127, 195);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(117, 23);
+            dateTimePicker1.TabIndex = 12;
+            // 
             // TelaTarefaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(536, 373);
+            ClientSize = new Size(354, 299);
+            Controls.Add(dateTimePicker1);
+            Controls.Add(label4);
             Controls.Add(rdbPrioridadeAlta);
             Controls.Add(rdbPrioridadeMedia);
             Controls.Add(rdbPrioridadeBaixa);
@@ -179,5 +201,7 @@
         private RadioButton rdbPrioridadeBaixa;
         private RadioButton rdbPrioridadeMedia;
         private RadioButton rdbPrioridadeAlta;
+        private Label label4;
+        private DateTimePicker dateTimePicker1;
     }
 }

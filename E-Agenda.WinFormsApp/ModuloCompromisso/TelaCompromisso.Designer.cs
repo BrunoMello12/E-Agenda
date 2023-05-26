@@ -34,10 +34,10 @@
             label6 = new Label();
             label7 = new Label();
             label9 = new Label();
-            checkBox1 = new CheckBox();
-            comboBox1 = new ComboBox();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            ckbSelecionarContato = new CheckBox();
+            cmbContatos = new ComboBox();
+            rdbRemoto = new RadioButton();
+            rdbPresencial = new RadioButton();
             txtLocalRemoto = new TextBox();
             txtLocalPresencial = new TextBox();
             txtId = new TextBox();
@@ -45,7 +45,7 @@
             txtData = new DateTimePicker();
             txtHorarioInicio = new DateTimePicker();
             txtHorarioTermino = new DateTimePicker();
-            button1 = new Button();
+            btnGravar = new Button();
             button2 = new Button();
             SuspendLayout();
             // 
@@ -109,50 +109,54 @@
             label9.TabIndex = 8;
             label9.Text = "Término:";
             // 
-            // checkBox1
+            // ckbSelecionarContato
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(26, 218);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(273, 19);
-            checkBox1.TabIndex = 9;
-            checkBox1.Text = "Deseja marcar um contato neste comprimisso?";
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            ckbSelecionarContato.AutoSize = true;
+            ckbSelecionarContato.Location = new Point(26, 218);
+            ckbSelecionarContato.Name = "ckbSelecionarContato";
+            ckbSelecionarContato.Size = new Size(273, 19);
+            ckbSelecionarContato.TabIndex = 9;
+            ckbSelecionarContato.Text = "Deseja marcar um contato neste comprimisso?";
+            ckbSelecionarContato.UseVisualStyleBackColor = true;
+            ckbSelecionarContato.CheckedChanged += ckbSelecionarContato_CheckedChanged;
             // 
-            // comboBox1
+            // cmbContatos
             // 
-            comboBox1.Enabled = false;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(26, 243);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(160, 23);
-            comboBox1.TabIndex = 10;
+            cmbContatos.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbContatos.Enabled = false;
+            cmbContatos.FormattingEnabled = true;
+            cmbContatos.Location = new Point(26, 243);
+            cmbContatos.Name = "cmbContatos";
+            cmbContatos.Size = new Size(160, 23);
+            cmbContatos.TabIndex = 10;
             // 
-            // radioButton1
+            // rdbRemoto
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(134, 305);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(70, 19);
-            radioButton1.TabIndex = 11;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Remoto:";
-            radioButton1.UseVisualStyleBackColor = true;
+            rdbRemoto.AutoSize = true;
+            rdbRemoto.Location = new Point(134, 305);
+            rdbRemoto.Name = "rdbRemoto";
+            rdbRemoto.Size = new Size(70, 19);
+            rdbRemoto.TabIndex = 11;
+            rdbRemoto.TabStop = true;
+            rdbRemoto.Text = "Remoto:";
+            rdbRemoto.UseVisualStyleBackColor = true;
+            rdbRemoto.CheckedChanged += rdbRemoto_CheckedChanged;
             // 
-            // radioButton2
+            // rdbPresencial
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(134, 337);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(81, 19);
-            radioButton2.TabIndex = 12;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Presencial:";
-            radioButton2.UseVisualStyleBackColor = true;
+            rdbPresencial.AutoSize = true;
+            rdbPresencial.Location = new Point(134, 337);
+            rdbPresencial.Name = "rdbPresencial";
+            rdbPresencial.Size = new Size(81, 19);
+            rdbPresencial.TabIndex = 12;
+            rdbPresencial.TabStop = true;
+            rdbPresencial.Text = "Presencial:";
+            rdbPresencial.UseVisualStyleBackColor = true;
+            rdbPresencial.CheckedChanged += rdbPresencial_CheckedChanged;
             // 
             // txtLocalRemoto
             // 
+            txtLocalRemoto.Enabled = false;
             txtLocalRemoto.Location = new Point(222, 305);
             txtLocalRemoto.Name = "txtLocalRemoto";
             txtLocalRemoto.Size = new Size(206, 23);
@@ -160,6 +164,7 @@
             // 
             // txtLocalPresencial
             // 
+            txtLocalPresencial.Enabled = false;
             txtLocalPresencial.Location = new Point(222, 337);
             txtLocalPresencial.Name = "txtLocalPresencial";
             txtLocalPresencial.Size = new Size(206, 23);
@@ -195,6 +200,7 @@
             txtHorarioInicio.Format = DateTimePickerFormat.Custom;
             txtHorarioInicio.Location = new Point(89, 153);
             txtHorarioInicio.Name = "txtHorarioInicio";
+            txtHorarioInicio.ShowUpDown = true;
             txtHorarioInicio.Size = new Size(97, 23);
             txtHorarioInicio.TabIndex = 18;
             // 
@@ -204,20 +210,21 @@
             txtHorarioTermino.Format = DateTimePickerFormat.Custom;
             txtHorarioTermino.Location = new Point(275, 153);
             txtHorarioTermino.Name = "txtHorarioTermino";
+            txtHorarioTermino.ShowUpDown = true;
             txtHorarioTermino.Size = new Size(97, 23);
             txtHorarioTermino.TabIndex = 19;
             // 
-            // button1
+            // btnGravar
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.DialogResult = DialogResult.OK;
-            button1.Location = new Point(275, 412);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 33);
-            button1.TabIndex = 20;
-            button1.Text = "Gravar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnGravar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnGravar.DialogResult = DialogResult.OK;
+            btnGravar.Location = new Point(275, 412);
+            btnGravar.Name = "btnGravar";
+            btnGravar.Size = new Size(75, 33);
+            btnGravar.TabIndex = 20;
+            btnGravar.Text = "Gravar";
+            btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += btnGravar_Click;
             // 
             // button2
             // 
@@ -236,7 +243,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(440, 457);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnGravar);
             Controls.Add(txtHorarioTermino);
             Controls.Add(txtHorarioInicio);
             Controls.Add(txtData);
@@ -244,10 +251,10 @@
             Controls.Add(txtId);
             Controls.Add(txtLocalPresencial);
             Controls.Add(txtLocalRemoto);
-            Controls.Add(radioButton2);
-            Controls.Add(radioButton1);
-            Controls.Add(comboBox1);
-            Controls.Add(checkBox1);
+            Controls.Add(rdbPresencial);
+            Controls.Add(rdbRemoto);
+            Controls.Add(cmbContatos);
+            Controls.Add(ckbSelecionarContato);
             Controls.Add(label9);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -269,10 +276,10 @@
         private Label label6;
         private Label label7;
         private Label label9;
-        private CheckBox checkBox1;
-        private ComboBox comboBox1;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private CheckBox ckbSelecionarContato;
+        private ComboBox cmbContatos;
+        private RadioButton rdbRemoto;
+        private RadioButton rdbPresencial;
         private TextBox txtLocalRemoto;
         private TextBox txtLocalPresencial;
         private TextBox txtId;
@@ -280,7 +287,7 @@
         private DateTimePicker txtData;
         private DateTimePicker txtHorarioInicio;
         private DateTimePicker txtHorarioTermino;
-        private Button button1;
+        private Button btnGravar;
         private Button button2;
     }
 }

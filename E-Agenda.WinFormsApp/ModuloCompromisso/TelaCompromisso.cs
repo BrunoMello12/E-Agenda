@@ -1,4 +1,5 @@
-﻿using E_Agenda.WinFormsApp.ModuloContato;
+﻿using E_Agenda.WinFormsApp.Compartilhado;
+using E_Agenda.WinFormsApp.ModuloContato;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,51 +14,105 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
 {
     public partial class TelaCompromisso : Form
     {
-        private Compromisso compromisso;
-        private RepositorioContato repositorioContato;
 
-        public TelaCompromisso(RepositorioContato repositorioContato)
+        public TelaCompromisso(List<Contato> contatos)
         {
             InitializeComponent();
 
-            this.repositorioContato = repositorioContato;
+            this.ConfigurarDialog();
+
+            CarregarContatos(contatos);
         }
 
-        public Compromisso Compromisso
+        private void CarregarContatos(List<Contato> contatos)
         {
-            get { return compromisso; }
-            set { txtAssunto.Text = value.assunto; txtHorarioInicio.Value = value.horaInicio; txtHorarioTermino.Value = value.horaTermino; txtData.Value = value.data; }
+            foreach (Contato contato in contatos)
+            {
+                cmbContatos.Items.Add(contato);
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public Compromisso ObterCompromisso()
         {
+            int id = Convert.ToInt32(txtId.Text);
             DateTime data = txtData.Value;
-            DateTime horarioInicio = txtHorarioInicio.Value;
-            DateTime horarioFinal = txtHorarioTermino.Value;
+            TimeSpan horarioInicio = txtHorarioInicio.Value.TimeOfDay;
+            TimeSpan horarioFinal = txtHorarioTermino.Value.TimeOfDay;
             string assunto = txtAssunto.Text;
-            string local = txtLocalPresencial.Text;
-            local = txtLocalPresencial.Text;
-            Contato contato = comboBox1.SelectedItem as Contato;
+            TipoLocalEnum tipo = rdbPresencial.Checked ? TipoLocalEnum.Presencial : TipoLocalEnum.Online;
 
-            compromisso = new Compromisso(data, horarioInicio, horarioFinal, assunto, contato);
+            Contato contato = cmbContatos.SelectedItem as Contato;
 
-            if (txtId.Text != "0")
-                compromisso.id = int.Parse(txtId.Text);
+            string local;
+
+            if (rdbPresencial.Checked)
+                local = txtLocalPresencial.Text;
+            else
+                local = txtLocalRemoto.Text;
+
+
+            return new Compromisso(data, horarioInicio, horarioFinal, assunto, contato, tipo, local, id);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        public void ConfigurarTela(Compromisso compromissoSelecionado)
         {
-            if (checkBox1.Checked)
-                comboBox1.Enabled = true;
+            txtId.Text = compromissoSelecionado.id.ToString();
+            txtAssunto.Text = compromissoSelecionado.assunto;
+            txtData.Value = compromissoSelecionado.data.Date;
+            txtHorarioInicio.Value = DateTime.Now.Date.Add(compromissoSelecionado.horaInicio);
+            txtHorarioTermino.Value = DateTime.Now.Date.Add(compromissoSelecionado.horaTermino);
 
-            ListarContatos();
+            if (compromissoSelecionado.contatoCompromisso != null)
+            {
+                ckbSelecionarContato.Checked = true;
+                cmbContatos.SelectedItem = compromissoSelecionado.contatoCompromisso;
+            }
+
+            if (compromissoSelecionado.tipoLocal == TipoLocalEnum.Presencial)
+            {
+                rdbPresencial.Checked = true;
+                txtLocalPresencial.Text = compromissoSelecionado.localPresencial;
+            }
+
+            else
+            {
+                rdbRemoto.Checked = true;
+                txtLocalRemoto.Text = compromissoSelecionado.localOnline;
+            }
         }
 
-        private void ListarContatos()
+        private void btnGravar_Click(object sender, EventArgs e)
         {
-            comboBox1.Items.Clear();
+            Compromisso compromisso = ObterCompromisso();
 
-            comboBox1.Items.AddRange(repositorioContato.SelecionarTodos().ToArray());
+            string[] erros = compromisso.Validar();
+
+            if (erros.Length > 0)
+            {
+                TelaPrincipalForm1.instancia.AtualizarRodape(erros[0]);
+
+                DialogResult = DialogResult.None;
+            }
+        }
+
+        private void rdbRemoto_CheckedChanged(object sender, EventArgs e)
+        {
+            txtLocalRemoto.Enabled = true;
+            txtLocalPresencial.Enabled = false;
+            txtLocalPresencial.Text = "";
+        }
+
+        private void rdbPresencial_CheckedChanged(object sender, EventArgs e)
+        {
+            txtLocalRemoto.Enabled = false;
+            txtLocalPresencial.Enabled = true;
+            txtLocalRemoto.Text = "";
+        }
+
+        private void ckbSelecionarContato_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbContatos.Enabled = !cmbContatos.Enabled;
+            cmbContatos.SelectedIndex = -1;
         }
     }
 }

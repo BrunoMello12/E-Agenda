@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Agenda.WinFormsApp.Compartilhado;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
         public TelaFiltro()
         {
             InitializeComponent();
+
+            this.ConfigurarDialog();
         }
 
         public StatusCompromissosEnum StatusSelecionado
@@ -29,40 +32,6 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
 
                 else
                     return StatusCompromissosEnum.Todos;
-            }
-        }
-
-        public DateTime DataInicial
-        {
-            get { return dateTimePicker1.Value; }
-        }
-
-        public DateTime DataFinal
-        {
-            get { return dateTimePicker2.Value; }
-        }
-
-        private void rdbCompromissosTodos_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbCompromissosTodos.Checked)
-            {
-                FiltroFuturo.Enabled = false;
-            }
-        }
-
-        private void rdbCompromissosPassados_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbCompromissosPassados.Checked)
-            {
-                FiltroFuturo.Enabled = false;
-            }
-        }
-
-        private void rdbCompromissosFuturos_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbCompromissosFuturos.Checked)
-            {
-                FiltroFuturo.Enabled = true;
             }
         }
     }

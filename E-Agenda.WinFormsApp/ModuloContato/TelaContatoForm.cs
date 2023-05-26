@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using E_Agenda.WinFormsApp.ModuloTarefa;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,35 +14,45 @@ namespace E_Agenda.WinFormsApp.ModuloContato
 {
     public partial class TelaContatoForm : Form
     {
-        private Contato contato;
-
         public TelaContatoForm()
         {
             InitializeComponent();
         }
 
-        public Contato Contato
+        public Contato ObterContato()
         {
-            get { return contato; }
-            set
-            {
-                txtId.Text = value.id.ToString(); txtNome.Text = value.nome;
-                txtTelefone.Text = value.telefone; txtEmpresa.Text = value.empresa; txtEmail.Text = value.email; txtCargo.Text = value.cargo;
-            }
+            int id = int.Parse(txtId.Text);
+            string nome = txtNome.Text;
+            string empresa = txtEmpresa.Text;
+            string telefone = txtTelefone.Text;
+            string email = txtEmail.Text;
+            string cargo = txtCargo.Text;
+
+            return new Contato(nome,empresa,telefone,email,cargo, id);
+        }
+
+        public void ConfigurarTela(Contato contatoSelecionado)
+        {
+            txtId.Text = contatoSelecionado.id.ToString();
+            txtNome.Text = contatoSelecionado.nome;
+            txtEmpresa.Text = contatoSelecionado.empresa;
+            txtTelefone.Text = contatoSelecionado.telefone;
+            txtEmail.Text = contatoSelecionado.email;
+            txtCargo.Text = contatoSelecionado.cargo;
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            string nome = txtNome.Text;
-            string empresa = txtEmpresa.Text;
-            string cargo = txtCargo.Text;
-            string email = txtEmail.Text;
-            string telefone = txtTelefone.Text;
+            Contato contato = ObterContato();
 
-            contato = new Contato(nome, empresa, telefone, email, cargo);
+            string[] erros = contato.Validar();
 
-            if (txtId.Text != "0")
-                contato.id = int.Parse(txtId.Text);
+            if(erros.Length > 0)
+            {
+                TelaPrincipalForm1.instancia.AtualizarRodape(erros[0]);
+
+                DialogResult = DialogResult.None;
+            }
         }
     }
 }
