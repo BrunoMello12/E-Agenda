@@ -24,6 +24,16 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override string ToolTipExcluir => "Excluir uma Tarefa existente";
 
+        public override string ToolTipFiltrar => "Filtrar Tarefas";
+
+        public override string ToolTipAdicionar => "Adicionar Itens na Tarefa";
+
+        public override bool AdicionarItensHabilitado => true;
+
+        public override bool FiltrarHabilitado => true;
+
+        public override bool ConcluirItensHabilitado => true;
+
         public override void Editar()
         {
             if (repositorioTarefa.listaRegistros.Count == 0) return;
@@ -90,6 +100,112 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
             }
         }
 
+        public override void Adicionar()
+        {
+            if (repositorioTarefa.listaRegistros.Count == 0) return;
+
+            TelaTarefaForm telaTarefa = new TelaTarefaForm();
+
+            Tarefa tarefaSelecionada = listagemTarefa.ObterTarefaSelecionada();
+
+            if (tarefaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma tarefa primeiro!", "Adição de tarefas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaCadastroItensForm telaItem = new TelaCadastroItensForm(tarefaSelecionada);
+
+            DialogResult opcaoEscolhida = telaItem.ShowDialog();
+
+            if(opcaoEscolhida == DialogResult.OK)
+            {
+                List<ItemTarefa> itensAdicionados = telaItem.ObterItensCadastrados();
+
+                tarefaSelecionada.items = itensAdicionados;
+
+                repositorioTarefa.Editar(tarefaSelecionada.id, tarefaSelecionada);
+            }
+
+            CarregarTarefas();
+        }
+
+        public override void Atualizar()
+        {
+            Tarefa tarefaSelecionada = listagemTarefa.ObterTarefaSelecionada();
+
+            if(tarefaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma tarefa primeiro!", "Atualização de itens",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if(tarefaSelecionada.items.Count == 0)
+            {
+                MessageBox.Show("A tarefa selecionada não tem itens adicionados",
+                    "Atualização de Itens", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaAtualizacaoItensForm telaAtualizacaoItensForm = new TelaAtualizacaoItensForm(tarefaSelecionada);
+
+            DialogResult opcaoEscolhida = telaAtualizacaoItensForm.ShowDialog();
+
+            if(opcaoEscolhida == DialogResult.OK)
+            {
+                List<ItemTarefa> itensMarcados = telaAtualizacaoItensForm.ObterItensMarcados();
+
+                List<ItemTarefa> itensPendentes = telaAtualizacaoItensForm.ObterItensPendentes();
+
+                foreach(ItemTarefa item in itensMarcados)
+                {
+                    tarefaSelecionada.ConcluirItem(item);
+                }
+
+                foreach(ItemTarefa item in itensPendentes)
+                {
+                    tarefaSelecionada.DesmarcarItem(item);
+                }
+            }
+
+            repositorioTarefa.Editar(tarefaSelecionada.id, tarefaSelecionada);
+
+            CarregarTarefas();
+        }
+
+        public override void Filtrar()
+        {
+            TelaFiltroTarefaForm telaFiltroTarefa = new TelaFiltroTarefaForm();
+
+            DialogResult opcaoEscolhida = telaFiltroTarefa.ShowDialog();
+
+            if(opcaoEscolhida == DialogResult.OK)
+            {
+                List<Tarefa> tarefas;
+
+                StatusTarefaEnum status = telaFiltroTarefa.ObterFiltroTarefa();
+
+                switch(status)
+                {
+                    case StatusTarefaEnum.Concluidos: tarefas = repositorioTarefa.SelecionarConcluidas(); break;
+                    case StatusTarefaEnum.Pendentes: tarefas = repositorioTarefa.SelecionarPendentes(); break;
+
+                    default: tarefas = repositorioTarefa.SelecionarTodos(); break;
+                }
+
+                CarregarTarefas(tarefas);
+            }
+        }
+
+        private void CarregarTarefas(List<Tarefa> tarefas)
+        {
+            listagemTarefa.AtualizarRegistros(tarefas);
+
+            TelaPrincipalForm1.instancia.AtualizarRodape($"Visualizando {tarefas.Count} tarefa(s)");
+        }
+
         private void CarregarTarefas()
         {
             List<Tarefa> tarefas = repositorioTarefa.SelecionarTodos();
@@ -112,9 +228,5 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
             return "Cadastro de Tarefas";
         }
 
-        public override void Filtrar()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

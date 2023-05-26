@@ -42,8 +42,6 @@ namespace E_Agenda.WinFormsApp
         {
             controlador = new ControladorContato(repositorioContato);
 
-            btnFiltrar.Visible = false;
-
             ConfigurarTelaPrincipal(controlador);
         }
 
@@ -51,16 +49,12 @@ namespace E_Agenda.WinFormsApp
         {
             controlador = new ControladorTarefa(repositorioTarefa);
 
-            btnFiltrar.Visible = false;
-
             ConfigurarTelaPrincipal(controlador);
         }
 
         private void compromissosMenuItem_Click(object sender, EventArgs e)
         {
             controlador = new ControladorCompromisso(repositorioCompromisso, repositorioContato);
-
-            btnFiltrar.Visible = true;
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -72,6 +66,8 @@ namespace E_Agenda.WinFormsApp
             ConfigurarTooTips(controlador);
 
             ConfigurarListagem(controlador);
+
+            ConfigurarBotoes(controlador);
         }
 
         private void ConfigurarListagem(ControladorBase controlador)
@@ -85,11 +81,23 @@ namespace E_Agenda.WinFormsApp
             pnlRegistros.Controls.Add(listagem);
         }
 
+        private void ConfigurarBotoes(ControladorBase controlador)
+        {
+            btnInserir.Enabled = controlador.InserirHabilitado;
+            btnEditar.Enabled = controlador.EditarHabilitado;
+            btnExcluir.Enabled = controlador.ExcluirHabilitado;
+            btnFiltrar.Enabled = controlador.FiltrarHabilitado;
+            btnAdicionar.Enabled = controlador.AdicionarItensHabilitado;
+            btnAtualizar.Enabled = controlador.ConcluirItensHabilitado;
+        }
+
         private void ConfigurarTooTips(ControladorBase controlador)
         {
             btnInserir.ToolTipText = controlador.ToolTipInserir;
             btnEditar.ToolTipText = controlador.ToolTipEditar;
             btnExcluir.ToolTipText = controlador.ToolTipExcluir;
+            btnFiltrar.ToolTipText = controlador.ToolTipFiltrar;
+            btnAdicionar.ToolTipText = controlador.ToolTipAdicionar;
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
@@ -120,6 +128,18 @@ namespace E_Agenda.WinFormsApp
             controlador.Filtrar();
         }
 
+        private void btnAdicionar_Click(object sender, EventArgs e)
+        {
+            if (controlador == null) return;
 
+            controlador.Adicionar();
+        }
+
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            if(controlador == null) return;
+
+            controlador.Atualizar();
+        }
     }
 }

@@ -89,8 +89,6 @@ namespace E_Agenda.WinFormsApp.ModuloContato
             return "Cadastro de Contatos";
         }
 
-        
-
         public override void Excluir()
         {
             if (repositorioContato.listaRegistros.Count == 0) return;
@@ -107,9 +105,5 @@ namespace E_Agenda.WinFormsApp.ModuloContato
             }
         }
 
-        public override void Filtrar()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

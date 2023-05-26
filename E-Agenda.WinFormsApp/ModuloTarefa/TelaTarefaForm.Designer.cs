@@ -75,7 +75,7 @@
             txtId.Location = new Point(127, 55);
             txtId.Name = "txtId";
             txtId.ReadOnly = true;
-            txtId.Size = new Size(100, 23);
+            txtId.Size = new Size(86, 23);
             txtId.TabIndex = 3;
             txtId.Text = "0";
             // 
@@ -83,7 +83,7 @@
             // 
             txtTitulo.Location = new Point(127, 98);
             txtTitulo.Name = "txtTitulo";
-            txtTitulo.Size = new Size(132, 23);
+            txtTitulo.Size = new Size(203, 23);
             txtTitulo.TabIndex = 4;
             // 
             // btnGravar

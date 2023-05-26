@@ -16,6 +16,8 @@ namespace E_Agenda.WinFormsApp.Compartilhado
 
         public virtual string ToolTipFiltrar { get; }
 
+        public virtual string ToolTipAdicionar { get; }
+
         public virtual bool InserirHabilitado { get { return true; } }
         public virtual bool EditarHabilitado { get { return true; } }
         public virtual bool ExcluirHabilitado { get { return true; } }
@@ -36,5 +38,9 @@ namespace E_Agenda.WinFormsApp.Compartilhado
         public abstract void Excluir();
 
         public virtual void Filtrar() { }
+
+        public virtual void Adicionar() { }
+
+        public virtual void Atualizar() { }
     }
 }
