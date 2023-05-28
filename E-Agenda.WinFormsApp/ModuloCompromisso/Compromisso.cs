@@ -65,11 +65,6 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
                    tipoLocal == compromisso.tipoLocal;
         }
 
-        public override string ToString()
-        {
-            return "Id: " + id + ", " + assunto + ", Data: " + data;
-        }
-
         public override string[] Validar()
         {
             List<string> erros = new List<string>();

@@ -1,6 +1,6 @@
-﻿namespace E_Agenda.WinFormsApp.ModuloCompromisso
+﻿namespace E_Agenda.WinFormsApp.ModuloContato
 {
-    partial class ListaCompromissoControl
+    partial class TabelaContatoControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listCompromissos = new ListBox();
+            grid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
             SuspendLayout();
             // 
-            // listCompromissos
+            // grid
             // 
-            listCompromissos.Dock = DockStyle.Fill;
-            listCompromissos.FormattingEnabled = true;
-            listCompromissos.ItemHeight = 15;
-            listCompromissos.Location = new Point(0, 0);
-            listCompromissos.Name = "listCompromissos";
-            listCompromissos.Size = new Size(439, 307);
-            listCompromissos.TabIndex = 0;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.Dock = DockStyle.Fill;
+            grid.Location = new Point(0, 0);
+            grid.Name = "grid";
+            grid.RowTemplate.Height = 25;
+            grid.Size = new Size(551, 377);
+            grid.TabIndex = 0;
             // 
-            // ListaCompromissoControl
+            // TabelaContatoControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(listCompromissos);
-            Name = "ListaCompromissoControl";
-            Size = new Size(439, 307);
+            Controls.Add(grid);
+            Name = "TabelaContatoControl";
+            Size = new Size(551, 377);
+            ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private ListBox listCompromissos;
+        private DataGridView grid;
     }
 }

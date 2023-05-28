@@ -1,6 +1,6 @@
 ﻿namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
-    partial class ListaTarefaControl
+    partial class TabelaTarefaControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listTarefas = new ListBox();
+            grid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
             SuspendLayout();
             // 
-            // listTarefas
+            // grid
             // 
-            listTarefas.Dock = DockStyle.Fill;
-            listTarefas.FormattingEnabled = true;
-            listTarefas.ItemHeight = 15;
-            listTarefas.Location = new Point(0, 0);
-            listTarefas.Name = "listTarefas";
-            listTarefas.Size = new Size(532, 374);
-            listTarefas.TabIndex = 0;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.Dock = DockStyle.Fill;
+            grid.Location = new Point(0, 0);
+            grid.Name = "grid";
+            grid.RowTemplate.Height = 25;
+            grid.Size = new Size(588, 455);
+            grid.TabIndex = 0;
             // 
-            // ListaTarefaControl
+            // TabelaTarefaControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(listTarefas);
-            Name = "ListaTarefaControl";
-            Size = new Size(532, 374);
+            Controls.Add(grid);
+            Name = "TabelaTarefaControl";
+            Size = new Size(588, 455);
+            ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private ListBox listTarefas;
+        private DataGridView grid;
     }
 }

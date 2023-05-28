@@ -10,7 +10,7 @@ namespace E_Agenda.WinFormsApp.ModuloContato
     public class ControladorContato : ControladorBase
     {
         private RepositorioContato repositorioContato;
-        private ListaContatoControl listagemContato;
+        private TabelaContatoControl tabelaContato;
 
         public ControladorContato(RepositorioContato repositorioContato)
         {
@@ -43,7 +43,7 @@ namespace E_Agenda.WinFormsApp.ModuloContato
         {
             TelaContatoForm telaContato = new TelaContatoForm();
 
-            Contato contatoSelecionado = listagemContato.ObterContatoSelecionado();
+            Contato contatoSelecionado = ObterContatoSelecionado();
 
             if(contatoSelecionado == null) 
             {
@@ -67,21 +67,28 @@ namespace E_Agenda.WinFormsApp.ModuloContato
             }
         }
 
+        private Contato ObterContatoSelecionado()
+        {
+            int id = tabelaContato.ObterIdSelecionado();
+
+            return repositorioContato.SelecionarPorId(id);
+        }
+
         private void CarregarContatos()
         {
             List<Contato> contatos = repositorioContato.SelecionarTodos();
 
-            listagemContato.AtualizarRegistros(contatos);
+            tabelaContato.AtualizarRegistros(contatos);
         }
 
         public override UserControl ObterListagem()
         {
-            if(listagemContato == null)
-                listagemContato = new ListaContatoControl();
+            if(tabelaContato == null)
+                tabelaContato = new TabelaContatoControl();
 
             CarregarContatos();
 
-            return listagemContato;
+            return tabelaContato;
         }
 
         public override string ObterTipoCadastro()
@@ -93,7 +100,7 @@ namespace E_Agenda.WinFormsApp.ModuloContato
         {
             if (repositorioContato.listaRegistros.Count == 0) return;
 
-            Contato contato = listagemContato.ObterContatoSelecionado();
+            Contato contato = ObterContatoSelecionado();
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o contato {contato.nome}?", "Exclusão de Contatos", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
