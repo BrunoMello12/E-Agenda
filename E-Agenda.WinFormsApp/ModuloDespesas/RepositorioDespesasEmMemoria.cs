@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloDespesas
 {
-    public class RepositorioDespesa : RepositorioBase<Despesa>
+    public class RepositorioDespesasEmMemoria : RepositorioEmMemoriaBase<Despesa>
     {
-        public RepositorioDespesa(List<Despesa> despesas)
+        public RepositorioDespesasEmMemoria(List<Despesa> despesas)
         {
             listaRegistros = despesas;
         }
 
-        public List<Despesa> ListarDespesasPorCategorias(Categoria categoria)
+        internal List<Despesa> ListarDespesasPorCategorias(Categoria categoria)
         {
-            return listaRegistros.Where(d => d.categorias.Contains(categoria)).ToList();
+            throw new NotImplementedException();
         }
     }
 }

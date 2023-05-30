@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloDespesas
 {
+    [Serializable]
     public class Despesa : EntidadeBase<Despesa>
     {
         public string descricao;

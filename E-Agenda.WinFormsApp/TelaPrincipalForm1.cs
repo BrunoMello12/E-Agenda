@@ -11,10 +11,10 @@ namespace E_Agenda.WinFormsApp
     {
         private ControladorBase controlador;
         private RepositorioContato repositorioContato = new RepositorioContato(new());
-        private RepositorioTarefa repositorioTarefa = new RepositorioTarefa(new());
+        private IRepositorioTarefa repositorioTarefa = new RepositorioTarefaEmArquivo();
         private RepositorioCompromisso repositorioCompromisso = new RepositorioCompromisso(new());
-        private RepositorioDespesa repositorioDespesa = new RepositorioDespesa(new());
-        private RepositorioCategorias repositorioCategorias = new RepositorioCategorias(new());
+        private IRepositorioDespesas repositorioDespesa = new RepositorioDespesasEmArquivo();
+        private RepositorioCategoriasEmMemoria repositorioCategorias = new RepositorioCategoriasEmMemoria(new());
 
         private static TelaPrincipalForm1 telaPrincipal;
 

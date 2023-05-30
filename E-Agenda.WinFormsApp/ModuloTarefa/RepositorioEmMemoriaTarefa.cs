@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
-    public class RepositorioTarefa : RepositorioBase<Tarefa>
+    public class RepositorioEmMemoriaTarefa : RepositorioEmMemoriaBase<Tarefa>, IRepositorioTarefa
     {
-        public RepositorioTarefa(List<Tarefa> tarefas) 
+        public RepositorioEmMemoriaTarefa(List<Tarefa> tarefas) 
         {
             listaRegistros = tarefas;
         }
@@ -25,6 +25,13 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
         {
             return listaRegistros.Where(x => x.percentualConcluido < 100)
                 .OrderByDescending(x => x.prioridade).ToList();
+        }
+
+        public List<Tarefa> SelecionarTodosOrdenadosPorPrioridade()
+        {
+            return listaRegistros
+                .OrderByDescending(x => x.prioridade)
+                .ToList();
         }
     }
 }

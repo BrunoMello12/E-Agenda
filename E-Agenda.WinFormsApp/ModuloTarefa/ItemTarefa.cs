@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
+    [Serializable]
     public class ItemTarefa
     {
         public string titulo;

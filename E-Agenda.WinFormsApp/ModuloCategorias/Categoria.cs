@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloCategorias
 {
+    [Serializable]
     public class Categoria : EntidadeBase<Categoria>
     {
         public string titulo;

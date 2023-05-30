@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.Compartilhado
 {
-    public class RepositorioBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
+    public class RepositorioEmMemoriaBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
     {
         public List<TEntidade> listaRegistros;
         private static int contador = 1;

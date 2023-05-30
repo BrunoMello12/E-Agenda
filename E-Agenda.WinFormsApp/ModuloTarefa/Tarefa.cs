@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
+    [Serializable]
     public class Tarefa : EntidadeBase<Tarefa>
     {
         public string titulo;

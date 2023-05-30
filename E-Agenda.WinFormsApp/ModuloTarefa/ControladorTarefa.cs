@@ -10,10 +10,10 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
     public class ControladorTarefa : ControladorBase
     {
-        RepositorioTarefa repositorioTarefa;
+        IRepositorioTarefa repositorioTarefa;
         TabelaTarefaControl tabelaTarefa;
 
-        public ControladorTarefa(RepositorioTarefa repositorioTarefa)
+        public ControladorTarefa(IRepositorioTarefa repositorioTarefa)
         {
             this.repositorioTarefa = repositorioTarefa;
         }
@@ -38,8 +38,6 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override void Editar()
         {
-            if (repositorioTarefa.listaRegistros.Count == 0) return;
-
             TelaTarefaForm telaTarefa = new TelaTarefaForm();
 
             Tarefa tarefaSelecionada = ObterTarefaSelecionada();
@@ -73,8 +71,6 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override void Excluir()
         {
-            if (repositorioTarefa.listaRegistros.Count == 0) return;
-
             Tarefa tarefaSelecionada = ObterTarefaSelecionada();
 
             if (tarefaSelecionada == null)
@@ -111,8 +107,6 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override void Adicionar()
         {
-            if (repositorioTarefa.listaRegistros.Count == 0) return;
-
             TelaTarefaForm telaTarefa = new TelaTarefaForm();
 
             Tarefa tarefaSelecionada = ObterTarefaSelecionada();
