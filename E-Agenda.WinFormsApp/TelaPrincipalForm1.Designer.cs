@@ -51,6 +51,7 @@
             toolStripSeparator3 = new ToolStripSeparator();
             lblTipoCadastro = new ToolStripLabel();
             pnlRegistros = new Panel();
+            btnVisualizar = new ToolStripButton();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -75,21 +76,21 @@
             // contatosMenuItem
             // 
             contatosMenuItem.Name = "contatosMenuItem";
-            contatosMenuItem.Size = new Size(180, 22);
+            contatosMenuItem.Size = new Size(154, 22);
             contatosMenuItem.Text = "Contatos";
             contatosMenuItem.Click += contatosMenuItem_Click;
             // 
             // compromissosMenuItem
             // 
             compromissosMenuItem.Name = "compromissosMenuItem";
-            compromissosMenuItem.Size = new Size(180, 22);
+            compromissosMenuItem.Size = new Size(154, 22);
             compromissosMenuItem.Text = "Compromissos";
             compromissosMenuItem.Click += compromissosMenuItem_Click;
             // 
             // tarefasToolStripMenuItem
             // 
             tarefasToolStripMenuItem.Name = "tarefasToolStripMenuItem";
-            tarefasToolStripMenuItem.Size = new Size(180, 22);
+            tarefasToolStripMenuItem.Size = new Size(154, 22);
             tarefasToolStripMenuItem.Text = "Tarefas";
             tarefasToolStripMenuItem.Click += tarefasToolStripMenuItem_Click;
             // 
@@ -97,20 +98,20 @@
             // 
             despesasMenuItem.DropDownItems.AddRange(new ToolStripItem[] { desespesasMenuItem, categoriasMenuItem });
             despesasMenuItem.Name = "despesasMenuItem";
-            despesasMenuItem.Size = new Size(180, 22);
+            despesasMenuItem.Size = new Size(154, 22);
             despesasMenuItem.Text = "Despesas";
             // 
             // desespesasMenuItem
             // 
             desespesasMenuItem.Name = "desespesasMenuItem";
-            desespesasMenuItem.Size = new Size(180, 22);
+            desespesasMenuItem.Size = new Size(133, 22);
             desespesasMenuItem.Text = "Desespesas";
             desespesasMenuItem.Click += desespesasMenuItem_Click;
             // 
             // categoriasMenuItem
             // 
             categoriasMenuItem.Name = "categoriasMenuItem";
-            categoriasMenuItem.Size = new Size(180, 22);
+            categoriasMenuItem.Size = new Size(133, 22);
             categoriasMenuItem.Text = "Categorias";
             categoriasMenuItem.Click += categoriasMenuItem_Click;
             // 
@@ -137,7 +138,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator2, btnFiltrar, toolStripSeparator1, btnAdicionar, btnAtualizar, toolStripSeparator3, lblTipoCadastro });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator2, btnFiltrar, toolStripSeparator1, btnAdicionar, btnAtualizar, toolStripSeparator3, btnVisualizar, lblTipoCadastro });
             toolStrip1.Location = new Point(0, 24);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 45);
@@ -243,6 +244,17 @@
             pnlRegistros.Size = new Size(800, 359);
             pnlRegistros.TabIndex = 3;
             // 
+            // btnVisualizar
+            // 
+            btnVisualizar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnVisualizar.Image = Properties.Resources.search_FILL0_wght400_GRAD0_opsz24;
+            btnVisualizar.ImageScaling = ToolStripItemImageScaling.None;
+            btnVisualizar.ImageTransparentColor = Color.Magenta;
+            btnVisualizar.Name = "btnVisualizar";
+            btnVisualizar.Padding = new Padding(7);
+            btnVisualizar.Size = new Size(42, 42);
+            btnVisualizar.Click += btnVisualizar_Click;
+            // 
             // TelaPrincipalForm1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -292,5 +304,6 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton btnAtualizar;
+        private ToolStripButton btnVisualizar;
     }
 }

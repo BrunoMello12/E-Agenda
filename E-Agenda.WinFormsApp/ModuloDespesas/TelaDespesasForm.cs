@@ -1,4 +1,5 @@
 ﻿using E_Agenda.WinFormsApp.Compartilhado;
+using E_Agenda.WinFormsApp.ModuloCategorias;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,15 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
 {
     public partial class TelaDespesasForm : Form
     {
-        public TelaDespesasForm()
+        public TelaDespesasForm(List<Categoria> categorias)
         {
             InitializeComponent();
 
             this.ConfigurarDialog();
 
             CarregarFormasDePagamento();
+
+            ConfigurarListaCategorias(categorias);
         }
 
         public void CarregarFormasDePagamento()
@@ -41,7 +44,11 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
 
             FormaPagamentoEnum formaPagamento = (FormaPagamentoEnum)cmbPagamento.SelectedItem;
 
-            return new Despesa(id, descricao, data, valor, formaPagamento);
+            Despesa despesa =  new Despesa(id, descricao, data, valor, formaPagamento);
+
+            despesa.categorias.AddRange(listCategorias.CheckedItems.Cast<Categoria>());
+
+            return despesa;
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -65,6 +72,28 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
             txtValor.Text = despesaSelecionada.valor.ToString();
             txtData.Value = despesaSelecionada.data.Date;
             cmbPagamento.Text = despesaSelecionada.formaPagamento.ToString();
+
+            int i = 0;
+
+            for (int j = 0; j < listCategorias.Items.Count; j++)
+            {
+                Categoria categoria = (Categoria)listCategorias.Items[j];
+
+                if (despesaSelecionada.categorias.Contains(categoria))
+                {
+                    listCategorias.SetItemChecked(i, true);
+                }
+
+                i++;
+            }
         }
+
+        public void ConfigurarListaCategorias(List<Categoria> categorias)
+        {
+            listCategorias.Items.Clear();
+
+            listCategorias.Items.AddRange(categorias.ToArray());
+        }
+
     }
 }

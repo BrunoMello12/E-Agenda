@@ -28,6 +28,8 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 
         public override string ToolTipAdicionar => "Adicionar Itens na Tarefa";
 
+        public override string ToolTipAtualizar => "Atualizar Percentual";
+
         public override bool AdicionarItensHabilitado => true;
 
         public override bool FiltrarHabilitado => true;

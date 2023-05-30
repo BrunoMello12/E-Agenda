@@ -1,4 +1,5 @@
 ﻿using E_Agenda.WinFormsApp.Compartilhado;
+using E_Agenda.WinFormsApp.ModuloDespesas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,14 @@ namespace E_Agenda.WinFormsApp.ModuloCategorias
 {
     public class ControladorCategorias : ControladorBase
     {
+        RepositorioDespesa repositorioDespesas;
         RepositorioCategorias repositorioCategorias;
         TabelaCategoriasControl tabelaCategoria;
 
-        public ControladorCategorias(RepositorioCategorias repositorioCategorias)
+        public ControladorCategorias(RepositorioCategorias repositorioCategorias, RepositorioDespesa repositorioDespesas)
         {
             this.repositorioCategorias = repositorioCategorias;
+            this.repositorioDespesas = repositorioDespesas;
         }
 
         public override string ToolTipInserir => "Inserir Categoria";
@@ -22,6 +25,10 @@ namespace E_Agenda.WinFormsApp.ModuloCategorias
         public override string ToolTipEditar => "Editar Categoria";
 
         public override string ToolTipExcluir => "Excluir Categoria";
+
+        public override string ToolTipVisualizarCategorias => "Visualizar Categorias com Despesas";
+
+        public override bool VisualizarCategoriasDespesas => true;
 
         public override void Editar()
         {
@@ -95,6 +102,31 @@ namespace E_Agenda.WinFormsApp.ModuloCategorias
             }
         }
 
+        public override void Visualizar()
+        {
+            Categoria categoria = ObterCategoriaSelecionada();
+
+            if (categoria == null)
+            {
+                MessageBox.Show("Selecione uma categoria!");
+                return;
+            }
+
+            List<Despesa> despesasPorCategoria = repositorioDespesas.ListarDespesasPorCategorias(categoria);
+
+            if (despesasPorCategoria.Count == 0)
+            {
+                MessageBox.Show("Nenhuma despesa para a categoria selecionada!");
+                return;
+            }
+
+            TelaVisualizarCategoriasForm tela = new TelaVisualizarCategoriasForm(despesasPorCategoria);
+
+            tela.CarregarLabel(categoria);
+
+            tela.ShowDialog();
+        }
+
         private void CarregarCategorias()
         {
             List<Categoria> categorias = repositorioCategorias.SelecionarTodos();
@@ -106,6 +138,8 @@ namespace E_Agenda.WinFormsApp.ModuloCategorias
         {
             if(tabelaCategoria == null)
                 tabelaCategoria = new TabelaCategoriasControl();
+
+            CarregarCategorias();
 
             return tabelaCategoria;
         }

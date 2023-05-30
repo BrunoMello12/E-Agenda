@@ -65,14 +65,14 @@ namespace E_Agenda.WinFormsApp
 
         private void desespesasMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorDespesa(repositorioDespesa);
+            controlador = new ControladorDespesa(repositorioDespesa, repositorioCategorias);
 
             ConfigurarTelaPrincipal(controlador);
         }
 
         private void categoriasMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorCategorias(repositorioCategorias);
+            controlador = new ControladorCategorias(repositorioCategorias, repositorioDespesa);
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -107,6 +107,7 @@ namespace E_Agenda.WinFormsApp
             btnFiltrar.Enabled = controlador.FiltrarHabilitado;
             btnAdicionar.Enabled = controlador.AdicionarItensHabilitado;
             btnAtualizar.Enabled = controlador.ConcluirItensHabilitado;
+            btnVisualizar.Enabled = controlador.VisualizarCategoriasDespesas;
         }
 
         private void ConfigurarTooTips(ControladorBase controlador)
@@ -116,6 +117,8 @@ namespace E_Agenda.WinFormsApp
             btnExcluir.ToolTipText = controlador.ToolTipExcluir;
             btnFiltrar.ToolTipText = controlador.ToolTipFiltrar;
             btnAdicionar.ToolTipText = controlador.ToolTipAdicionar;
+            btnAtualizar.ToolTipText = controlador.ToolTipAtualizar;
+            btnVisualizar.ToolTipText = controlador.ToolTipVisualizarCategorias;
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
@@ -160,6 +163,11 @@ namespace E_Agenda.WinFormsApp
             controlador.Atualizar();
         }
 
-        
+        private void btnVisualizar_Click(object sender, EventArgs e)
+        {
+            if(controlador == null) return;
+
+            controlador.Visualizar();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using E_Agenda.WinFormsApp.Compartilhado;
+using E_Agenda.WinFormsApp.ModuloCategorias;
 using E_Agenda.WinFormsApp.ModuloCompromisso;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
         public DateTime data;
         public string valor;
         public FormaPagamentoEnum formaPagamento;
+        public List<Categoria> categorias;
 
         public Despesa(int id, string descricao, DateTime data, string valor, FormaPagamentoEnum formaPagamento)
         {
@@ -22,6 +24,7 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
             this.data = data;
             this.valor = valor;
             this.formaPagamento = formaPagamento;
+            categorias = new List<Categoria>();
         }
 
 
@@ -32,6 +35,7 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
             data = entidadeAtualizada.data.Date;
             valor = entidadeAtualizada .valor;
             formaPagamento = entidadeAtualizada.formaPagamento;
+            categorias = entidadeAtualizada.categorias;
         }
 
         public override bool Equals(object? obj)
@@ -57,6 +61,11 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
                 erros.Add("O campo forma de pagamento é obrigatório");
 
             return erros.ToArray(); 
+        }
+
+        public override string ToString()
+        {
+            return descricao + " feita no dia " + data.ToString("dd/MM/yyyy");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using E_Agenda.WinFormsApp.Compartilhado;
+using E_Agenda.WinFormsApp.ModuloCategorias;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -12,10 +13,12 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
     {
         private TabelaDespesaControl tabelaDespesa;
         private RepositorioDespesa repositorioDespesa;
+        private RepositorioCategorias repositorioCategorias;
 
-        public ControladorDespesa(RepositorioDespesa repositorioDespesa)
+        public ControladorDespesa(RepositorioDespesa repositorioDespesa, RepositorioCategorias repositorioCategorias)
         {
             this.repositorioDespesa = repositorioDespesa;
+            this.repositorioCategorias = repositorioCategorias;
         }
 
         public override string ToolTipInserir => "Inserir Despesa";
@@ -26,7 +29,7 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
 
         public override void Editar()
         {
-            TelaDespesasForm telaDespesasForm = new TelaDespesasForm();
+            TelaDespesasForm telaDespesasForm = new TelaDespesasForm(repositorioCategorias.SelecionarTodos());
 
             Despesa despesaSelecionada = ObterDespesaSelecionada();
 
@@ -70,7 +73,7 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
 
         public override void Inserir()
         {
-            TelaDespesasForm telaDespesasForm = new TelaDespesasForm();
+            TelaDespesasForm telaDespesasForm = new TelaDespesasForm(repositorioCategorias.SelecionarTodos());
 
             DialogResult opcaoEscolhida = telaDespesasForm.ShowDialog();
 
