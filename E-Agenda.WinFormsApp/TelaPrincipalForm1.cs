@@ -1,6 +1,8 @@
 using E_Agenda.WinFormsApp.Compartilhado;
+using E_Agenda.WinFormsApp.ModuloCategorias;
 using E_Agenda.WinFormsApp.ModuloCompromisso;
 using E_Agenda.WinFormsApp.ModuloContato;
+using E_Agenda.WinFormsApp.ModuloDespesas;
 using E_Agenda.WinFormsApp.ModuloTarefa;
 
 namespace E_Agenda.WinFormsApp
@@ -11,6 +13,8 @@ namespace E_Agenda.WinFormsApp
         private RepositorioContato repositorioContato = new RepositorioContato(new());
         private RepositorioTarefa repositorioTarefa = new RepositorioTarefa(new());
         private RepositorioCompromisso repositorioCompromisso = new RepositorioCompromisso(new());
+        private RepositorioDespesa repositorioDespesa = new RepositorioDespesa(new());
+        private RepositorioCategorias repositorioCategorias = new RepositorioCategorias(new());
 
         private static TelaPrincipalForm1 telaPrincipal;
 
@@ -55,6 +59,20 @@ namespace E_Agenda.WinFormsApp
         private void compromissosMenuItem_Click(object sender, EventArgs e)
         {
             controlador = new ControladorCompromisso(repositorioCompromisso, repositorioContato);
+
+            ConfigurarTelaPrincipal(controlador);
+        }
+
+        private void desespesasMenuItem_Click(object sender, EventArgs e)
+        {
+            controlador = new ControladorDespesa(repositorioDespesa);
+
+            ConfigurarTelaPrincipal(controlador);
+        }
+
+        private void categoriasMenuItem_Click(object sender, EventArgs e)
+        {
+            controlador = new ControladorCategorias(repositorioCategorias);
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -137,9 +155,11 @@ namespace E_Agenda.WinFormsApp
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            if(controlador == null) return;
+            if (controlador == null) return;
 
             controlador.Atualizar();
         }
+
+        
     }
 }

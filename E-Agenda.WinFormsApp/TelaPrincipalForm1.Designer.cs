@@ -75,21 +75,21 @@
             // contatosMenuItem
             // 
             contatosMenuItem.Name = "contatosMenuItem";
-            contatosMenuItem.Size = new Size(154, 22);
+            contatosMenuItem.Size = new Size(180, 22);
             contatosMenuItem.Text = "Contatos";
             contatosMenuItem.Click += contatosMenuItem_Click;
             // 
             // compromissosMenuItem
             // 
             compromissosMenuItem.Name = "compromissosMenuItem";
-            compromissosMenuItem.Size = new Size(154, 22);
+            compromissosMenuItem.Size = new Size(180, 22);
             compromissosMenuItem.Text = "Compromissos";
             compromissosMenuItem.Click += compromissosMenuItem_Click;
             // 
             // tarefasToolStripMenuItem
             // 
             tarefasToolStripMenuItem.Name = "tarefasToolStripMenuItem";
-            tarefasToolStripMenuItem.Size = new Size(154, 22);
+            tarefasToolStripMenuItem.Size = new Size(180, 22);
             tarefasToolStripMenuItem.Text = "Tarefas";
             tarefasToolStripMenuItem.Click += tarefasToolStripMenuItem_Click;
             // 
@@ -97,20 +97,22 @@
             // 
             despesasMenuItem.DropDownItems.AddRange(new ToolStripItem[] { desespesasMenuItem, categoriasMenuItem });
             despesasMenuItem.Name = "despesasMenuItem";
-            despesasMenuItem.Size = new Size(154, 22);
+            despesasMenuItem.Size = new Size(180, 22);
             despesasMenuItem.Text = "Despesas";
             // 
             // desespesasMenuItem
             // 
             desespesasMenuItem.Name = "desespesasMenuItem";
-            desespesasMenuItem.Size = new Size(133, 22);
+            desespesasMenuItem.Size = new Size(180, 22);
             desespesasMenuItem.Text = "Desespesas";
+            desespesasMenuItem.Click += desespesasMenuItem_Click;
             // 
             // categoriasMenuItem
             // 
             categoriasMenuItem.Name = "categoriasMenuItem";
-            categoriasMenuItem.Size = new Size(133, 22);
+            categoriasMenuItem.Size = new Size(180, 22);
             categoriasMenuItem.Text = "Categorias";
+            categoriasMenuItem.Click += categoriasMenuItem_Click;
             // 
             // relatóriosMenuItem
             // 

@@ -79,7 +79,9 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
 
         private Compromisso ObterCompromissoSelecionado()
         {
-            throw new NotImplementedException();
+            int id = tabelaCompromisso.ObterIdSelecionado();
+
+            return repositorioCompromisso.SelecionarPorId(id);
         }
 
         public override void Excluir()
