@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloCompromisso
 {
-    public class RepositorioCompromisso : RepositorioEmMemoriaBase<Compromisso>
+    public class RepositorioCompromissoEmMemoria : RepositorioEmMemoriaBase<Compromisso>
     {
 
-        public RepositorioCompromisso(List<Compromisso> compromissos)
+        public RepositorioCompromissoEmMemoria(List<Compromisso> compromissos)
         {
             listaRegistros = compromissos;
         }

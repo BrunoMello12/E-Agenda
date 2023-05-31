@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloContato
 {
-    public class RepositorioContato : RepositorioEmMemoriaBase<Contato>
+    public class RepositorioContatoEmMemoria : RepositorioEmMemoriaBase<Contato>
     {
-        public RepositorioContato(List<Contato> contatos)
+        public RepositorioContatoEmMemoria(List<Contato> contatos)
         {
             listaRegistros = contatos;
         }

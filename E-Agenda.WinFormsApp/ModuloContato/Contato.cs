@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloContato
 {
+    [Serializable]
     public class Contato : EntidadeBase<Contato>
     {
         public string nome;

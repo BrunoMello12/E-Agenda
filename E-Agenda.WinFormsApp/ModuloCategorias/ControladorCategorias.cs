@@ -11,10 +11,10 @@ namespace E_Agenda.WinFormsApp.ModuloCategorias
     public class ControladorCategorias : ControladorBase
     {
         IRepositorioDespesas repositorioDespesas;
-        RepositorioCategoriasEmMemoria repositorioCategorias;
+        IRepositorioCategoria repositorioCategorias;
         TabelaCategoriasControl tabelaCategoria;
 
-        public ControladorCategorias(RepositorioCategoriasEmMemoria repositorioCategorias, IRepositorioDespesas repositorioDespesas)
+        public ControladorCategorias(IRepositorioCategoria repositorioCategorias, IRepositorioDespesas repositorioDespesas)
         {
             this.repositorioCategorias = repositorioCategorias;
             this.repositorioDespesas = repositorioDespesas;

@@ -9,10 +9,10 @@ namespace E_Agenda.WinFormsApp.ModuloContato
 {
     public class ControladorContato : ControladorBase
     {
-        private RepositorioContato repositorioContato;
+        private IRepositorioContato repositorioContato;
         private TabelaContatoControl tabelaContato;
 
-        public ControladorContato(RepositorioContato repositorioContato)
+        public ControladorContato(IRepositorioContato repositorioContato)
         {
             this.repositorioContato = repositorioContato;
         }
@@ -98,8 +98,6 @@ namespace E_Agenda.WinFormsApp.ModuloContato
 
         public override void Excluir()
         {
-            if (repositorioContato.listaRegistros.Count == 0) return;
-
             Contato contato = ObterContatoSelecionado();
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o contato {contato.nome}?", "Exclusão de Contatos", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);

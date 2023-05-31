@@ -17,31 +17,6 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
         {
             if (File.Exists(NOME_ARQUIVO_DESPESAS))
                 CarregarRegistrosDoArquivo(NOME_ARQUIVO_DESPESAS);
-        }
-
-        public void Editar(int id, Despesa despesa)
-        {
-            Despesa despesaSelecionada = SelecionarPorId(id);
-
-            despesa.AtualizarInformacoes(despesaSelecionada);
-
-            GravarTarefasEmArquivo(NOME_ARQUIVO_DESPESAS);
-        }
-
-        public void Excluir(Despesa despesaSelecionada)
-        {
-            listaRegistros.Remove(despesaSelecionada);
-
-            GravarTarefasEmArquivo(NOME_ARQUIVO_DESPESAS);
-        }
-
-        public void Inserir(Despesa novaDespesa)
-        {
-            contadorRegistros++;
-
-            novaDespesa.id = contadorRegistros;
-
-            listaRegistros.Add(novaDespesa);
 
             GravarTarefasEmArquivo(NOME_ARQUIVO_DESPESAS);
         }
@@ -49,16 +24,6 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
         public List<Despesa> ListarDespesasPorCategorias(Categoria categoria)
         {
             return listaRegistros.Where(d => d.categorias.Contains(categoria)).ToList();
-        }
-
-        public Despesa SelecionarPorId(int id)
-        {
-            return listaRegistros.FirstOrDefault(x => x.id == id);
-        }
-
-        public List<Despesa> SelecionarTodos()
-        {
-            return listaRegistros;
         }
     }
 }

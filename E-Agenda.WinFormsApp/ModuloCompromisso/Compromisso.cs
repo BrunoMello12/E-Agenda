@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.ModuloCompromisso
 {
+    [Serializable]
     public class Compromisso : EntidadeBase<Compromisso>
     {
         public DateTime data;

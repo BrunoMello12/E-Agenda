@@ -13,9 +13,9 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
     {
         private TabelaDespesaControl tabelaDespesa;
         private IRepositorioDespesas repositorioDespesa;
-        private RepositorioCategoriasEmMemoria repositorioCategorias;
+        private IRepositorioCategoria repositorioCategorias;
 
-        public ControladorDespesa(IRepositorioDespesas repositorioDespesa, RepositorioCategoriasEmMemoria repositorioCategorias)
+        public ControladorDespesa(IRepositorioDespesas repositorioDespesa, IRepositorioCategoria repositorioCategorias)
         {
             this.repositorioDespesa = repositorioDespesa;
             this.repositorioCategorias = repositorioCategorias;

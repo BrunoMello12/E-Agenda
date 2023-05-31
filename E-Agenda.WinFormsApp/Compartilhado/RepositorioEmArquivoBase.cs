@@ -1,4 +1,5 @@
-﻿using E_Agenda.WinFormsApp.ModuloTarefa;
+﻿using E_Agenda.WinFormsApp.ModuloDespesas;
+using E_Agenda.WinFormsApp.ModuloTarefa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,37 @@ namespace E_Agenda.WinFormsApp.Compartilhado
     {
         protected int contadorRegistros = 0;
         protected List<TEntidade> listaRegistros = new List<TEntidade>();
+
+        public void Editar(int id, TEntidade entidade)
+        {
+            TEntidade entidadeSelecionada = SelecionarPorId(id);
+
+            entidade.AtualizarInformacoes(entidadeSelecionada);
+        }
+
+        public void Excluir(TEntidade entidadeSelecionada)
+        {
+            listaRegistros.Remove(entidadeSelecionada);
+        }
+
+        public void Inserir(TEntidade novaEntidade)
+        {
+            contadorRegistros++;
+
+            novaEntidade.id = contadorRegistros;
+
+            listaRegistros.Add(novaEntidade);
+        }
+
+        public TEntidade SelecionarPorId(int id)
+        {
+            return listaRegistros.FirstOrDefault(x => x.id == id);
+        }
+
+        public List<TEntidade> SelecionarTodos()
+        {
+            return listaRegistros;
+        }
 
         public void CarregarRegistrosDoArquivo(string caminho)
         {
@@ -28,6 +60,8 @@ namespace E_Agenda.WinFormsApp.Compartilhado
 
         public void AtualizarContador()
         {
+            if(listaRegistros.Count == 0) return;
+
             contadorRegistros = listaRegistros.Max(x => x.id);
         }
 
