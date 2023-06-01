@@ -9,13 +9,14 @@ namespace E_Agenda.WinFormsApp.ModuloContato
 {
     public class RepositorioContatoEmArquivo : RepositorioEmArquivoBase<Contato>, IRepositorioContato
     {
-        private const string NOME_ARQUIVO_CONTATO = "contatos.bin";
-        Contato contato = new Contato();
-
-        public RepositorioContatoEmArquivo()
+        public RepositorioContatoEmArquivo(ContextoDados contextoDados) : base(contextoDados)
         {
-            if (File.Exists(NOME_ARQUIVO_CONTATO))
-                CarregarRegistrosDoArquivo(contato);
+            
+        }
+
+        protected override List<Contato> ObterRegistros()
+        {
+            return contextoDados.contatos;
         }
     }
 }

@@ -9,13 +9,13 @@ namespace E_Agenda.WinFormsApp.ModuloCategorias
 {
     public class RepositorioCategoriaEmArquivo : RepositorioEmArquivoBase<Categoria>, IRepositorioCategoria
     {
-        private const string NOME_ARQUIVO_CATEGORIA = "categorias.bin";
-        Categoria categoria = new Categoria();
-
-        public RepositorioCategoriaEmArquivo()
+        public RepositorioCategoriaEmArquivo(ContextoDados contexto) : base(contexto)
         {
-            if (File.Exists(NOME_ARQUIVO_CATEGORIA))
-                CarregarRegistrosDoArquivo(categoria);
+        }
+
+        protected override List<Categoria> ObterRegistros()
+        {
+            return contextoDados.categorias;
         }
     }
 }

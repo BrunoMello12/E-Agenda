@@ -9,12 +9,14 @@ namespace E_Agenda.WinFormsApp
 {
     public partial class TelaPrincipalForm1 : Form
     {
+        static ContextoDados contextoDados = new ContextoDados(carregarDados: true);
+
         private ControladorBase controlador;
-        private IRepositorioContato repositorioContato = new RepositorioContatoEmArquivo();
-        private IRepositorioTarefa repositorioTarefa = new RepositorioTarefaEmArquivo();
-        private IRepositorioCompromisso repositorioCompromisso = new RepositorioCompromissoEmArquivo();
-        private IRepositorioDespesas repositorioDespesa = new RepositorioDespesasEmArquivo();
-        private IRepositorioCategoria repositorioCategorias = new RepositorioCategoriaEmArquivo();
+        private IRepositorioContato repositorioContato = new RepositorioContatoEmArquivo(contextoDados);
+        private IRepositorioTarefa repositorioTarefa = new RepositorioTarefaEmArquivo(contextoDados);
+        private IRepositorioCompromisso repositorioCompromisso = new RepositorioCompromissoEmArquivo(contextoDados);
+        private IRepositorioDespesas repositorioDespesa = new RepositorioDespesasEmArquivo(contextoDados);
+        private IRepositorioCategoria repositorioCategorias = new RepositorioCategoriaEmArquivo(contextoDados);
 
         private static TelaPrincipalForm1 telaPrincipal;
 

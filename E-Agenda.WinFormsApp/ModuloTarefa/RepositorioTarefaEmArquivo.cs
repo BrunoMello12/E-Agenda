@@ -10,34 +10,36 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
 {
     public class RepositorioTarefaEmArquivo : RepositorioEmArquivoBase<Tarefa>, IRepositorioTarefa
     {
-        private const string NOME_ARQUIVO_TAREFAS = "tarefas.bin";
-        Tarefa tarefa = new Tarefa();
-
-        public RepositorioTarefaEmArquivo()
+        public RepositorioTarefaEmArquivo(ContextoDados contextoDados) : base(contextoDados)
         {
-            if (File.Exists(NOME_ARQUIVO_TAREFAS))
-                CarregarRegistrosDoArquivo(tarefa);
+            
+        }
+
+        protected override List<Tarefa> ObterRegistros()
+        {
+            return contextoDados.tarefas;
         }
 
         public List<Tarefa> SelecionarConcluidas()
         {
-            return listaRegistros
+            return ObterRegistros()
                     .Where(x => x.percentualConcluido == 100)
                     .ToList();
         }
 
         public List<Tarefa> SelecionarPendentes()
         {
-            return listaRegistros
+            return ObterRegistros()
                     .Where(x => x.percentualConcluido < 100)
                     .ToList();
         }
 
         public List<Tarefa> SelecionarTodosOrdenadosPorPrioridade()
         {
-            return listaRegistros
+            return ObterRegistros()
                    .OrderByDescending(x => x.prioridade)
                    .ToList();
         }
+
     }
 }

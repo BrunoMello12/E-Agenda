@@ -12,10 +12,19 @@ using System.Threading.Tasks;
 
 namespace E_Agenda.WinFormsApp.Compartilhado
 {
-    public class RepositorioEmArquivoBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
+    public abstract class RepositorioEmArquivoBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
     {
-        protected int contadorRegistros = 0;
-        protected List<TEntidade> listaRegistros = new List<TEntidade>();
+        protected ContextoDados contextoDados;
+        private int contadorRegistros;
+
+        public RepositorioEmArquivoBase(ContextoDados contexto)
+        {
+            contextoDados = contexto;
+
+            AtualizarContador();
+        }
+
+        protected abstract List<TEntidade> ObterRegistros();
 
         public void Editar(int id, TEntidade entidade)
         {
@@ -23,103 +32,47 @@ namespace E_Agenda.WinFormsApp.Compartilhado
 
             entidade.AtualizarInformacoes(entidadeSelecionada);
 
-            GravarTarefasEmArquivo(entidade);
+            contextoDados.GravarEmArquivoJson();
         }
 
         public void Excluir(TEntidade entidadeSelecionada)
         {
+            List<TEntidade> listaRegistros = ObterRegistros();
+
             listaRegistros.Remove(entidadeSelecionada);
 
-            GravarTarefasEmArquivo(entidadeSelecionada);
+            contextoDados.GravarEmArquivoJson();
         }
 
         public void Inserir(TEntidade novaEntidade)
         {
+            List<TEntidade> listaRegistros = ObterRegistros();
+
             contadorRegistros++;
 
             novaEntidade.id = contadorRegistros;
 
             listaRegistros.Add(novaEntidade);
 
-            GravarTarefasEmArquivo(novaEntidade);
+            contextoDados.GravarEmArquivoJson();
         }
 
         public TEntidade SelecionarPorId(int id)
         {
+            List<TEntidade> listaRegistros = ObterRegistros();
+
             return listaRegistros.FirstOrDefault(x => x.id == id);
         }
 
         public List<TEntidade> SelecionarTodos()
         {
-            return listaRegistros;
-        }
-
-        public void CarregarRegistrosDoArquivo(TEntidade entidade)
-        {
-            string caminho = VerificarCaminho(entidade);
-
-            BinaryFormatter serializador = new BinaryFormatter();
-
-            byte[] registrosEmBytes = File.ReadAllBytes(caminho);
-
-            MemoryStream registroStream = new MemoryStream(registrosEmBytes);
-
-            listaRegistros = (List<TEntidade>)serializador.Deserialize(registroStream);
-
-            AtualizarContador();
+            return ObterRegistros();
         }
 
         public void AtualizarContador()
         {
-            if(listaRegistros.Count == 0) return;
-
-            contadorRegistros = listaRegistros.Max(x => x.id);
+            if (ObterRegistros().Count > 0)
+                contadorRegistros = ObterRegistros().Max(x => x.id);
         }
-
-        public void GravarTarefasEmArquivo(TEntidade entidade)
-        {
-            string caminho = VerificarCaminho(entidade);
-
-            BinaryFormatter serializador = new BinaryFormatter();
-
-            MemoryStream registroStream = new MemoryStream();
-
-            serializador.Serialize(registroStream, listaRegistros);
-
-            byte[] registrosEmBytes = registroStream.ToArray();
-
-            File.WriteAllBytes(caminho, registrosEmBytes);
-        }
-
-        public string VerificarCaminho(TEntidade registro)
-        {
-
-            string caminho;
-
-            if (registro.GetType() == typeof(Contato))
-            {
-                caminho = "contatos.bin";
-            }
-            else if (registro.GetType() == typeof(Compromisso))
-            {
-                caminho = "compromissos.bin";
-            }
-            else if (registro.GetType() == typeof(Despesa))
-            {
-                caminho = "despesas.bin";
-            }
-            else if (registro.GetType() == typeof(Tarefa))
-            {
-                caminho = "tarefas.bin";
-            }
-            else
-            {
-                caminho = "categorias.bin";
-            }
-
-            return caminho;
-
-        }
-
     }
 }

@@ -11,20 +11,21 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
 {
     public class RepositorioDespesasEmArquivo : RepositorioEmArquivoBase<Despesa>, IRepositorioDespesas
     {
-        private const string NOME_ARQUIVO_DESPESAS = "despesas.bin";
-        Despesa despesa = new Despesa();
-
-        public RepositorioDespesasEmArquivo()
+        public RepositorioDespesasEmArquivo(ContextoDados contexto) : base(contexto)
         {
-            if (File.Exists(NOME_ARQUIVO_DESPESAS))
-                CarregarRegistrosDoArquivo(despesa);
-
-            
         }
+
+        protected override List<Despesa> ObterRegistros()
+        {
+            return contextoDados.despesas;
+        }
+        
 
         public List<Despesa> ListarDespesasPorCategorias(Categoria categoria)
         {
-            return listaRegistros.Where(d => d.categorias.Contains(categoria)).ToList();
+            return ObterRegistros().Where(d => d.categorias.Contains(categoria)).ToList();
         }
+
+        
     }
 }

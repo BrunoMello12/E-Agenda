@@ -9,20 +9,21 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
 {
     public class RepositorioCompromissoEmArquivo : RepositorioEmArquivoBase<Compromisso>, IRepositorioCompromisso
     {
-        private const string NOME_ARQUIVO_COMPROMISSO = "compromissos.bin";
-        Compromisso compromisso = new Compromisso();
-
-        public RepositorioCompromissoEmArquivo()
+        public RepositorioCompromissoEmArquivo(ContextoDados contexto) : base(contexto)
         {
-            if (File.Exists(NOME_ARQUIVO_COMPROMISSO))
-                CarregarRegistrosDoArquivo(compromisso);
+            
+        }
+
+        protected override List<Compromisso> ObterRegistros()
+        {
+            return contextoDados.compromissos;
         }
 
         public List<Compromisso> SelecionarCompromissosFuturos()
         {
             List<Compromisso> compromissosFuturos = new List<Compromisso>();
 
-            foreach (Compromisso item in listaRegistros)
+            foreach (Compromisso item in ObterRegistros())
             {
                 if (item.data > DateTime.Now.Date)
                     compromissosFuturos.Add(item);
@@ -35,7 +36,7 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
         {
             List<Compromisso> compromissosPassados = new List<Compromisso>();
 
-            foreach (Compromisso item in listaRegistros)
+            foreach (Compromisso item in ObterRegistros())
             {
                 if (item.data < DateTime.Now.Date)
                     compromissosPassados.Add(item);
@@ -43,5 +44,7 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
 
             return compromissosPassados;
         }
+
+        
     }
 }
