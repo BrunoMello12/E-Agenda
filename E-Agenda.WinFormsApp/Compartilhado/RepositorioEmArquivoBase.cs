@@ -1,5 +1,8 @@
-﻿using E_Agenda.WinFormsApp.ModuloDespesas;
+﻿using E_Agenda.WinFormsApp.ModuloCompromisso;
+using E_Agenda.WinFormsApp.ModuloContato;
+using E_Agenda.WinFormsApp.ModuloDespesas;
 using E_Agenda.WinFormsApp.ModuloTarefa;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +22,15 @@ namespace E_Agenda.WinFormsApp.Compartilhado
             TEntidade entidadeSelecionada = SelecionarPorId(id);
 
             entidade.AtualizarInformacoes(entidadeSelecionada);
+
+            GravarTarefasEmArquivo(entidade);
         }
 
         public void Excluir(TEntidade entidadeSelecionada)
         {
             listaRegistros.Remove(entidadeSelecionada);
+
+            GravarTarefasEmArquivo(entidadeSelecionada);
         }
 
         public void Inserir(TEntidade novaEntidade)
@@ -33,6 +40,8 @@ namespace E_Agenda.WinFormsApp.Compartilhado
             novaEntidade.id = contadorRegistros;
 
             listaRegistros.Add(novaEntidade);
+
+            GravarTarefasEmArquivo(novaEntidade);
         }
 
         public TEntidade SelecionarPorId(int id)
@@ -45,8 +54,10 @@ namespace E_Agenda.WinFormsApp.Compartilhado
             return listaRegistros;
         }
 
-        public void CarregarRegistrosDoArquivo(string caminho)
+        public void CarregarRegistrosDoArquivo(TEntidade entidade)
         {
+            string caminho = VerificarCaminho(entidade);
+
             BinaryFormatter serializador = new BinaryFormatter();
 
             byte[] registrosEmBytes = File.ReadAllBytes(caminho);
@@ -65,8 +76,10 @@ namespace E_Agenda.WinFormsApp.Compartilhado
             contadorRegistros = listaRegistros.Max(x => x.id);
         }
 
-        public void GravarTarefasEmArquivo(string caminho)
+        public void GravarTarefasEmArquivo(TEntidade entidade)
         {
+            string caminho = VerificarCaminho(entidade);
+
             BinaryFormatter serializador = new BinaryFormatter();
 
             MemoryStream registroStream = new MemoryStream();
@@ -77,5 +90,36 @@ namespace E_Agenda.WinFormsApp.Compartilhado
 
             File.WriteAllBytes(caminho, registrosEmBytes);
         }
+
+        public string VerificarCaminho(TEntidade registro)
+        {
+
+            string caminho;
+
+            if (registro.GetType() == typeof(Contato))
+            {
+                caminho = "contatos.bin";
+            }
+            else if (registro.GetType() == typeof(Compromisso))
+            {
+                caminho = "compromissos.bin";
+            }
+            else if (registro.GetType() == typeof(Despesa))
+            {
+                caminho = "despesas.bin";
+            }
+            else if (registro.GetType() == typeof(Tarefa))
+            {
+                caminho = "tarefas.bin";
+            }
+            else
+            {
+                caminho = "categorias.bin";
+            }
+
+            return caminho;
+
+        }
+
     }
 }

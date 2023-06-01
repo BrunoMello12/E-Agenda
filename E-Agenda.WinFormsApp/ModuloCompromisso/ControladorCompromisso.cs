@@ -32,7 +32,7 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
 
         public override void Inserir()
         {
-            List<Contato> contatos = new List<Contato>();
+            List<Contato> contatos = repositorioContato.SelecionarTodos();
             TelaCompromisso telaCompromisso = new TelaCompromisso(contatos);
 
             contatos = repositorioContato.SelecionarTodos();

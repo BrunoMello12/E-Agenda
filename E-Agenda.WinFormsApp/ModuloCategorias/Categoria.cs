@@ -14,6 +14,10 @@ namespace E_Agenda.WinFormsApp.ModuloCategorias
         public string titulo;
         public List<Despesa> despesas;
 
+        public Categoria()
+        {
+            
+        }
 
         public Categoria(int id, string titulo)
         {

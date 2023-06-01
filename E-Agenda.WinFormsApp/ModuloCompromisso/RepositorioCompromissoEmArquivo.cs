@@ -9,14 +9,13 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
 {
     public class RepositorioCompromissoEmArquivo : RepositorioEmArquivoBase<Compromisso>, IRepositorioCompromisso
     {
-        private const string NOME_ARQUIVO_COMPROMISSO = "compromisso.bin";
+        private const string NOME_ARQUIVO_COMPROMISSO = "compromissos.bin";
+        Compromisso compromisso = new Compromisso();
 
         public RepositorioCompromissoEmArquivo()
         {
             if (File.Exists(NOME_ARQUIVO_COMPROMISSO))
-                CarregarRegistrosDoArquivo(NOME_ARQUIVO_COMPROMISSO);
-
-            GravarTarefasEmArquivo(NOME_ARQUIVO_COMPROMISSO);
+                CarregarRegistrosDoArquivo(compromisso);
         }
 
         public List<Compromisso> SelecionarCompromissosFuturos()

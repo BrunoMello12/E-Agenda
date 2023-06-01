@@ -17,6 +17,11 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
         public List<ItemTarefa> items;
         public decimal percentualConcluido;
 
+        public Tarefa()
+        {
+            
+        }
+
         public Tarefa(int id, string titulo, StatusPrioridadeEnum prioridade, DateTime data)
         {
             this.id = id;

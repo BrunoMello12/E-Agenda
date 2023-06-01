@@ -11,13 +11,12 @@ namespace E_Agenda.WinFormsApp.ModuloTarefa
     public class RepositorioTarefaEmArquivo : RepositorioEmArquivoBase<Tarefa>, IRepositorioTarefa
     {
         private const string NOME_ARQUIVO_TAREFAS = "tarefas.bin";
+        Tarefa tarefa = new Tarefa();
 
         public RepositorioTarefaEmArquivo()
         {
             if (File.Exists(NOME_ARQUIVO_TAREFAS))
-                CarregarRegistrosDoArquivo(NOME_ARQUIVO_TAREFAS);
-
-            GravarTarefasEmArquivo(NOME_ARQUIVO_TAREFAS);
+                CarregarRegistrosDoArquivo(tarefa);
         }
 
         public List<Tarefa> SelecionarConcluidas()

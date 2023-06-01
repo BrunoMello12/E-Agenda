@@ -12,13 +12,14 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
     public class RepositorioDespesasEmArquivo : RepositorioEmArquivoBase<Despesa>, IRepositorioDespesas
     {
         private const string NOME_ARQUIVO_DESPESAS = "despesas.bin";
+        Despesa despesa = new Despesa();
 
         public RepositorioDespesasEmArquivo()
         {
             if (File.Exists(NOME_ARQUIVO_DESPESAS))
-                CarregarRegistrosDoArquivo(NOME_ARQUIVO_DESPESAS);
+                CarregarRegistrosDoArquivo(despesa);
 
-            GravarTarefasEmArquivo(NOME_ARQUIVO_DESPESAS);
+            
         }
 
         public List<Despesa> ListarDespesasPorCategorias(Categoria categoria)

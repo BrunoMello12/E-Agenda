@@ -28,7 +28,7 @@ namespace E_Agenda.WinFormsApp.ModuloCompromisso
         {
             foreach (Contato contato in contatos)
             {
-                cmbContatos.Items.Add(contato);
+                cmbContatos.Items.Add(contato.nome);
             }
         }
 

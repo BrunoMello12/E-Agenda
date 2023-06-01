@@ -18,6 +18,11 @@ namespace E_Agenda.WinFormsApp.ModuloDespesas
         public FormaPagamentoEnum formaPagamento;
         public List<Categoria> categorias;
 
+        public Despesa()
+        {
+            
+        }
+
         public Despesa(int id, string descricao, DateTime data, string valor, FormaPagamentoEnum formaPagamento)
         {
             this.id = id;

@@ -16,6 +16,11 @@ namespace E_Agenda.WinFormsApp.ModuloContato
         public string cargo;
         public string empresa;
 
+        public Contato()
+        {
+            
+        }
+
         public Contato(string nome, string empresa, string telefone, string email, string cargo, int id)
         {
             this.id = id;
