@@ -1,4 +1,5 @@
-﻿using E_Agenda.WinFormsApp.Compartilhado;
+﻿using E_Agenda.Dominio.ModuloContato;
+using E_Agenda.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

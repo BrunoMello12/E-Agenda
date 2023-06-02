@@ -1,3 +1,13 @@
+using E_Agenda.Dominio.ModuloCategorias;
+using E_Agenda.Dominio.ModuloCompromisso;
+using E_Agenda.Dominio.ModuloContato;
+using E_Agenda.Dominio.ModuloDespesas;
+using E_Agenda.Dominio.ModuloTarefa;
+using E_Agenda.Infra.Compartilhado;
+using E_Agenda.Infra.ModuloCategorias;
+using E_Agenda.Infra.ModuloCompromisso;
+using E_Agenda.Infra.ModuloContato;
+using E_Agenda.Infra.ModuloDespesas;
 using E_Agenda.WinFormsApp.Compartilhado;
 using E_Agenda.WinFormsApp.ModuloCategorias;
 using E_Agenda.WinFormsApp.ModuloCompromisso;

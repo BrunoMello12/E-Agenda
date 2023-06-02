@@ -1,4 +1,5 @@
-﻿using E_Agenda.WinFormsApp.Compartilhado;
+﻿using E_Agenda.Dominio.ModuloTarefa;
+using E_Agenda.WinFormsApp.Compartilhado;
 using System.Linq;
 
 namespace E_Agenda.WinFormsApp.ModuloTarefa

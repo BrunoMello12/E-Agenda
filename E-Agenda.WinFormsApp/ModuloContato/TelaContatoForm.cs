@@ -1,4 +1,5 @@
 ﻿
+using E_Agenda.Dominio.ModuloContato;
 using E_Agenda.WinFormsApp.ModuloTarefa;
 using System;
 using System.Collections.Generic;

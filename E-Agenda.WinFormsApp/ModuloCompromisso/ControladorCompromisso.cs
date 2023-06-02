@@ -1,10 +1,7 @@
-﻿using E_Agenda.WinFormsApp.Compartilhado;
-using E_Agenda.WinFormsApp.ModuloContato;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using E_Agenda.Dominio.ModuloCompromisso;
+using E_Agenda.Dominio.ModuloContato;
+using E_Agenda.WinFormsApp.Compartilhado;
+
 
 namespace E_Agenda.WinFormsApp.ModuloCompromisso
 {

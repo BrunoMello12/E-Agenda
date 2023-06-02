@@ -1,4 +1,6 @@
-﻿using E_Agenda.WinFormsApp.Compartilhado;
+﻿using E_Agenda.Dominio.ModuloCategorias;
+using E_Agenda.Dominio.ModuloDespesas;
+using E_Agenda.WinFormsApp.Compartilhado;
 using E_Agenda.WinFormsApp.ModuloDespesas;
 using System;
 using System.Collections.Generic;
